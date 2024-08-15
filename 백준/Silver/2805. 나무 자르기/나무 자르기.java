@@ -36,10 +36,10 @@ public class Main {
 			}
 			
 			if (s >= M) {
-				result = (int) mid;
-				min = (int) mid + 1;
+				result = mid;
+				min = mid + 1;
 			} else if (s < M) {
-				max = (int) mid - 1;
+				max = mid - 1;
 			}
 
 		}
