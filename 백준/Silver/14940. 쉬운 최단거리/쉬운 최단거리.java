@@ -51,7 +51,7 @@ public class Main {
 
 		for (int i = 1; i <= N; i++) {
 			for (int j = 1; j <= M; j++) {
-				if ((result[i][j] != 0) || (i == tr && j == tc) || (map[i][j] == 0)) {
+				if ((result[i][j] != 0) || (map[i][j] == 0) || map[i][j]==2) {
 					sb.append(result[i][j] + " ");
 				} else {
 					sb.append(-1 + " ");
