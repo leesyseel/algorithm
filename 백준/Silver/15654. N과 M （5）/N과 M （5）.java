@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
-	static StringBuffer sb;
+	static StringBuilder sb;
 	static int N,M;
 	
 	static void perm(int nidx, int midx, int check,int[] nums,int[] arr) {
@@ -28,7 +28,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer stk;
-		sb = new StringBuffer();
+		sb = new StringBuilder();
 
 		stk = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(stk.nextToken());
