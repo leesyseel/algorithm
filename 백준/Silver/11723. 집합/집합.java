@@ -1,10 +1,6 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
+
 
 public class Main {
 
@@ -12,12 +8,10 @@ public class Main {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
 		StringTokenizer stk;
-		stk = new StringTokenizer(br.readLine());
 		
-		int N= Integer.parseInt(stk.nextToken());
-		Set<Integer> S = new HashSet<>();
+		int N= Integer.parseInt(br.readLine());
+		int S = 0;
 		String act;
-		
 		
 		for(int i=0;i<N;i++) {
 			stk = new StringTokenizer(br.readLine());
@@ -26,31 +20,30 @@ public class Main {
 			if(!stk.hasMoreTokens()) {
 				switch(act) {
 				case "all":
-					for(int j=1;j<21;j++)
-						if(!S.contains(j)) S.add(j);
+					S =(1<<21)-1; 					
 					break;
 				case "empty":
-					for(int j=1;j<21;j++)
-						S.removeAll(S);
+					S=0;
 					break;
 				}
 			}else {
 				int idx=Integer.parseInt(stk.nextToken());
 				switch (act) {
 				case "add":
-					if(!S.contains(idx)) S.add(idx);
+					S|=1<<idx;
 					break;
 				case "remove":
-					if(S.contains(idx)) S.remove(idx);
+					S &= ~(1<<idx);
 					break;
 				case "check":
-					int res=0;
-					if(S.contains(idx)) res=1;
+					int res;
+					if((S&1<<idx)!=0) res=1;
+					else res=0;
 					sb.append(res+"\n");
 					break;
 				case "toggle":
-					if(S.contains(idx)) S.remove(idx);
-					else S.add(idx);
+					if((S&1<<idx)!=0) S &= ~(1<<idx);
+					else S|=1<<idx;
 					break;
 				}
 			}
