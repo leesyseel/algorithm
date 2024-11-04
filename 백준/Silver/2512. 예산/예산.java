@@ -13,31 +13,37 @@ public class Main {
 		int[] nums = new int[N];
 		int lt = 0;
 		int rt = 0;
+		int s = 0;
 
 		stk = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++) {
 			nums[i] = Integer.parseInt(stk.nextToken());
 			rt = rt > nums[i] ? rt : nums[i];
+			s += nums[i];
 		}
 
 		int M = Integer.parseInt(br.readLine());
-		int res = 0;
+		if (s <= M) {
+			System.out.println(rt);
+		} else {
+			int res = 0;
 
-		while (lt <= rt) {
-			int mid = (lt + rt) / 2;
+			while (lt <= rt) {
+				int mid = (lt + rt) / 2;
 
-			int sum = 0;
-			for (int i = 0; i < N; i++) {
-				sum += nums[i] > mid ? mid : nums[i];
+				int sum = 0;
+				for (int i = 0; i < N; i++) {
+					sum += nums[i] > mid ? mid : nums[i];
+				}
+
+				if (sum <= M) {
+					res = mid;
+					lt = mid + 1;
+				} else {
+					rt = mid - 1;
+				}
 			}
-
-			if (sum <= M) {
-				res = mid;
-				lt = mid + 1;
-			} else {
-				rt = mid - 1;
-			}
+			System.out.println(res);
 		}
-		System.out.println(res);
 	}
 }
