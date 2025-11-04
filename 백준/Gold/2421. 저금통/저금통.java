@@ -21,10 +21,7 @@ class Main{
     
     static int isPrime(int a, int b){
         
-        String tmp1 = Integer.toString(a);
-        String tmp2 = Integer.toString(b);
-        String s = tmp1 + tmp2;
-        int num = Integer.parseInt(s);
+        int num = Integer.parseInt("" + a + b);
         
         if(primes[num] == 0){
             return 0;    
