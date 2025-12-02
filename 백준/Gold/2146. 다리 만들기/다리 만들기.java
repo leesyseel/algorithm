@@ -28,19 +28,14 @@ class Main{
         }
     }
     
-    static int BFS(int cnt){
+    static int BFS(int sr, int sc){
         
         boolean[][] visited = new boolean[N][N];
+        
         Queue<int[]> Q = new ArrayDeque<>();
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                if(board[i][j] == cnt){
-                    Q.add(new int[] {i, j, 0});
-                    visited[i][j] = true;
-                }
-            }
-        }
-
+        Q.add(new int[] {sr, sc, 0});
+        visited[sr][sc] = true;
+        
         while(!Q.isEmpty()){
             int[] curl = Q.poll();
             int r = curl[0];
@@ -51,16 +46,19 @@ class Main{
                 int nr = r + dx[d][0];
                 int nc = c + dx[d][1];
                 
-                if(nr < 0 || nr >= N || nc < 0 || nc >= N || visited[nr][nc] || board[nr][nc] == cnt) continue;
-                
+                if(nr < 0 || nr >= N || nc < 0 || nc >= N || visited[nr][nc]) continue;
                 if(board[nr][nc] != 0){
-                    return len;
+                    if(board[nr][nc] == board[sr][sc]){
+                        continue;
+                    }else{
+                        return len;
+                    }
+                }else{
+                    Q.add(new int[] {nr, nc, len + 1});
+                    visited[nr][nc] = true;
                 }
-                Q.add(new int[] {nr, nc, len + 1});
-                visited[nr][nc] = true;
             }
         }
-        
         return -1;
     }
     
@@ -86,8 +84,14 @@ class Main{
 		}
 		
 		int res = Integer.MAX_VALUE;
-		for(int i = 2; i <= cnt;  i++){
-		    res = Math.min(res, BFS(i));
+		for(int i = 0; i < N;  i++){
+		    for(int j = 0; j < N; j++){
+		        if(board[i][j] != 0){
+		            int tmp = BFS(i, j);
+		            if(tmp == -1) continue;
+		            res = Math.min(res, tmp);
+		        }
+		    }
 		}
 		System.out.println(res);
 	}
