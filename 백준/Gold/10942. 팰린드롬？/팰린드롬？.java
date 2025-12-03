@@ -5,8 +5,9 @@ class Main{
     
     static int N;
     static int[] arr;
+    static int[][] dp;
     
-    static int solve(int lt, int rt){
+    static int isPalindrome(int lt, int rt){
         while(lt < rt){
             if(arr[lt] != arr[rt]) return 0;
             lt++; rt--;
@@ -21,6 +22,10 @@ class Main{
 		
 		N = Integer.parseInt(br.readLine());
 		arr = new int[N];
+		dp = new int[2001][2001];
+		for(int i = 0; i < 2001; i++){
+		    Arrays.fill(dp[i], -1);
+		}
 		
 		stk = new StringTokenizer(br.readLine());
 		for(int i = 0; i < N; i++){
@@ -33,7 +38,16 @@ class Main{
 		    int S = Integer.parseInt(stk.nextToken()) - 1;
 		    int E = Integer.parseInt(stk.nextToken()) - 1;
 		    
-		    sb.append(solve(S, E)+"\n");
+		    if(dp[S][E] == -1){
+		        dp[S][E] = isPalindrome(S, E);
+		        int r = S, c = S;
+		        if(dp[r][c] == 1){
+		            while(++r <= --c){
+		                dp[r][c] = 1;
+		            }
+		        }
+		    }
+		    sb.append(dp[S][E] + "\n");
 		}
 		System.out.println(sb);
 	}
