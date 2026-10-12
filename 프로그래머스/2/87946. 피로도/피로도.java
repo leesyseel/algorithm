@@ -1,5 +1,3 @@
-
-
 class Solution {
     static int N;
     static int answer;
