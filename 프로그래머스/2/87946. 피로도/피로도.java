@@ -20,15 +20,7 @@ class Solution {
         answer = -1;
         N = dungeons.length;
         visited = new boolean[N];
-        
-        for(int i = 0; i < N; i++){
-            if(dungeons[i][0] <= k){
-                visited[i] = true;
-                DFS(1, k - dungeons[i][1], dungeons);
-                visited[i] = false;
-            }
-        }
-
+        DFS(0, k, dungeons);
         return answer;
     }
 }
